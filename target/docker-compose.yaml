@@ -1,0 +1,8 @@
+version: '3.8'
+
+services:
+  app:
+    image: vulnerable-api
+    build: source/.
+    ports:
+      - "13000:13000"

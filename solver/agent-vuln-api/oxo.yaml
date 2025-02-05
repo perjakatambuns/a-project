@@ -1,0 +1,16 @@
+kind: Agent
+name: vuln-api
+version: 0.0.1
+description: Agent untuk memindai berbagai kerentanan seperti LFI, SSTI, HHI, SQLi, RFI, dan XSS.
+in_selectors:
+  - v3.asset.link
+out_selectors:
+  - v3.report.vulnerability
+restart_policy: on-failure
+args:
+  - name: "target_url"
+    type: "string"
+    description: "URL target yang akan dipindai."
+    value: "http://host.docker.internal:13000/api/"
+docker_file_path: Dockerfile
+docker_build_root: .

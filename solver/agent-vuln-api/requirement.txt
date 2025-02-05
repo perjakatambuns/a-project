@@ -1,0 +1,4 @@
+requests
+ostorlab[agent]
+flask
+aio-pika
